@@ -1,34 +1,21 @@
 {
   "expo": {
-    "name": "MeowPay-Expo",
-    "slug": "MeowPay-Expo",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/MeowPay.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/MeowPay Transparent.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
+    "scheme": "acme",
+    "userInterfaceStyle": "automatic",
+    "orientation": "default",
     "web": {
-      "favicon": "./assets/favicon.png",
+      "output": "static",
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
-    ]
+      [
+        "expo-router",
+        {
+          "origin": "https://n"
+        }
+      ]
+    ],
+    "name": "MeowPay-Expo",
+    "slug": "MeowPay-Expo"
   }
 }
