@@ -1,45 +1,58 @@
-import { Link } from "expo-router";
-import React from "react";
-import { Text, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+/**
+* Copyright (c) 2024 Anthony Kung (anth.dev)
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* @file   index.tsx
+* @author Anthony Kung <hi@anth.dev> (anth.dev)
+* @date   Created on 04/16/2024 23:39:44
+*/
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Link } from "expo-router";
+import { Text, View, Image } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { router } from "expo-router";
+import { useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+
+import Auth from "@/components/Auth";
 
 export default function Page() {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        router.replace("/dashboard");
+      } else {
+        // Do nothing
+      }
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        router.replace("/dashboard");
+      } else {
+        // Do nothing
+      }
+    });
+  }, []);
+
   return (
     <View className="flex flex-1">
-      <Header />
-
-      <View className="flex-1">
-        <View className="py-12 md:py-24 lg:py-32 xl:py-48">
-          <View className="px-4 md:px-6">
-            <View className="flex flex-col items-center gap-4 text-center">
-              <Text
-                role="heading"
-                className="text-3xl text-center native:text-5xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl"
-              >
-                Welcome to Project ACME
-              </Text>
-              <Text className="mx-auto max-w-[700px] text-lg text-center text-gray-500 md:text-xl dark:text-gray-400">
-                Discover and collaborate on amce. Explore our services now.
-              </Text>
-
-              <View className="gap-4">
-                <Link
-                  suppressHighlighting
-                  className="flex h-9 items-center justify-center overflow-hidden rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 web:shadow ios:shadow transition-colors hover:bg-gray-900/90 active:bg-gray-400/90 web:focus-visible:outline-none web:focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                  href="/"
-                >
-                  Explore
-                </Link>
-              </View>
-            </View>
-          </View>
-        </View>
+      <View className="flex flex-1 justify-center items-center">
+        <Image source={require("@/assets/MeowPay Transparent.png")} className="w-32 h-32" />
+        <Text className="text-2xl font-bold">Welcome to MeowPay</Text>
+        <Auth />
       </View>
-
-      <Footer />
     </View>
   );
 }

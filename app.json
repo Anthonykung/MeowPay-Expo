@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "acme",
+    "scheme": "com.anthonykung.meowpay",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
     "web": {
@@ -13,9 +13,32 @@
         {
           "origin": "https://n"
         }
-      ]
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.anthonykung.meowpay",
+          "enableGooglePay": true
+        }
+      ],
+      "expo-secure-store"
     ],
     "name": "MeowPay-Expo",
-    "slug": "MeowPay-Expo"
+    "slug": "MeowPay-Expo",
+    "icon": "./src/assets/MeowPay.png",
+    "extra": {
+      "router": {
+        "origin": "https://n"
+      },
+      "eas": {
+        "projectId": "c843684d-78c4-406e-bb7c-40ac19671713"
+      }
+    },
+    "android": {
+      "package": "com.anthonykung.meowpay"
+    },
+    "ios": {
+      "bundleIdentifier": "com.anthonykung.meowpay"
+    }
   }
 }
